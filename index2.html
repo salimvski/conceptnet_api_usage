@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<title>projet 2</title>
+	<style>
+		body {
+			font-size: 18px;
+			font-family: arial;
+			background: #f4f4f4;
+			line-height: 1.5em;
+		}
+
+		header {
+			margin: auto;
+			background: rgb(66, 66, 68);
+			color: #fff;
+			padding: 20px;
+			text-align: center;
+			border: 4px rgb(41, 41, 43) solid;
+
+		}
+
+		.container-fluid {
+			margin: auto;
+			text-align: center;
+			width: 300px;
+			height: 200px;
+			padding-top: 10px;
+		}
+
+		#bt1 {
+			font-size: 25px;
+			color: cornsilk;
+			background: rgb(0, 110, 255);
+			border: 4px rgb(25, 22, 202) solid;
+		}
+
+		#bt2 {
+			font-size: 25px;
+			color: cornsilk;
+			background: yellowgreen;
+			border: 4px rgb(2, 104, 2) solid;
+		}
+
+		.form-outline {
+			margin: auto;
+			text-align: center;
+		}
+
+		.gfg {
+			margin: auto;
+			padding: 5px;
+			overflow: auto;
+			text-align: justify;
+		}
+
+		.games {
+			margin: auto;
+			text-align: center;
+			width: 500px;
+			height: 65px;
+			padding-top: 10px;
+			padding-bottom: 20px;
+		}
+		#consigne-consigne{
+			text-align: justify;
+		}
+
+		#next {
+			font-size: 25px;
+			color: cornsilk;
+			background: yellowgreen;
+			border: 4px rgb(2, 104, 2) solid;
+		}
+
+		#previous {
+			font-size: 25px;
+			color: cornsilk;
+			background: yellowgreen;
+			border: 4px rgb(2, 104, 2) solid;
+		}
+
+		#hit {
+			font-size: 25px;
+			color: cornsilk;
+			background: yellowgreen;
+			border: 4px rgb(2, 104, 2) solid;
+		}
+
+		.btns {
+			padding-bottom: 20px;
+		}
+
+		#oui-non {
+			font-size: 15px;
+			color: black;
+			background: rgb(148, 76, 148);
+			border: 2px rgb(110, 4, 102) solid;
+		}
+
+		#consigne {
+			font-size: 15px;
+			color: black;
+			background: rgb(212, 125, 11);
+			border: 2px rgb(104, 51, 2) solid;
+		}
+
+		#qui-suis-je {
+			font-size: 15px;
+			color: black;
+			background: rgb(251, 255, 0);
+			border: 2px rgb(97, 87, 1) solid;
+		}
+
+		#jeux {
+			margin: auto;
+			width: 500px;
+			text-align: center;
+		}
+
+		#timer {
+			margin: auto;
+			width: 100px;
+			text-align: center;
+			color: red;
+			font-size: 25px;
+			font-family: 'Courier New';
+			border: red solid;
+		}
+
+		.page {
+			text-align: center;
+		}
+
+		#prompt {
+			margin: auto;
+			width: 500px;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>Projet 2:</h1>
+		<h2>Client ConceptNet</h2>
+	</header>
+	<div class="page">
+		<nav class="navbar navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">
+					<button type="button" id="bt1" class="btn">Consultation</button>
+					<button type="button" id='bt2' class="btn">Jeu</button>
+				</a>
+			</div>
+		</nav>
+		<div class='games'>
+			<div id="reglement">
+			<ul>
+			<li id="consigne-consigne"> Pour jouer au jeu Oui-Non : <br>
+				Il suffit de déterminer si la proposition est vraie ou fausse <br>
+				Si elle est vraie, on click sur oui, sinon on click sur non<br>
+			</li>
+			<li id="consigne-consigne"> Pour jouer au jeu consigne : <br>
+				les reponses doivent etre écrites comme ceci "input1 input2 input3 <br>
+				sans le respect de ces consignes des comportements innatendus peuvent survenir<br>
+			</li>
+			<li id="consigne-consigne"> Pour jouer au jeu Qui suis-je : <br>
+				Il s'agit de deviner le concept censuré par "???"<br>
+				Chaque 20 secondes, un nouvel indice vous sera donné<br>
+			</li>
+		</ul>
+	</div>
+			<div class='btns'>
+
+				<button id="oui-non" type="button" class="btn">Oui-Non</button>
+				<button id="consigne" type="button" class="btn">Consigne</button>
+				<button id="qui-suis-je" type="button" class="btn">Qui suis-je?</button>
+
+			</div>
+			<div class="oui-non" id="jeux">
+				<div class="countdownOui-non" id="countdownOui-non"></div>
+
+
+				<p classs="form-control" id="prompt"></p>
+				<p id="resultat"></p>
+				<form>
+					<label class="form-label" for="oui-non"></label><br>
+					<button id="oui" type="button" value="0">Oui</button>
+					<button id="non" type="button" value="1">Non</button>
+				</form>
+
+			</div>
+			<div class="consigne" id="jeux">
+				<div id="countdown"></div>
+				<div id="p-consigne"></div>
+				<div id="p-consigne-false"></div>
+				<form>
+					<input type="search" id="consigne_input" class="form-control" placeholder="Search..." />
+					<label class="form-label" for="consigne"></label> <br>
+					<button id="consigne-answer" type="button" name="">Soumettre</button> <br>
+
+
+				</form>
+				<p id="resultConsigne"></p>
+
+			</div>
+			<div class="qui-suis-je" id="jeux">
+				<div id="countdownQui"></div>
+				<h2 id="question"></h2>
+				<ul id="indices"></ul>
+				<p id="result"></p>
+				<form>
+					<input type="answer" id="qui-suis-je-answer" class="form-control" placeholder="Réponse" />
+					<label class="form-label" for="qui-suis-je-answer"></label> <br>
+					<button id="submitQui" type="submit">Soumettre</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="maindiv">
+
+		<div class="input-group">
+			<div class="form-outline">
+				<form>
+					<input type="search" id="form1" class="form-control" placeholder="Search..." />
+					<label class="form-label" for="form1"></label> <br>
+					<button id="hit" type="button" name="">Search</button> <br>
+
+				</form>
+				<br>
+				<button id="next" type="button" class="btn btn-outline-info">Next</button>
+				<button id="previous" type="button" class="btn btn-outline-info">Previous</button>
+
+			</div>
+		</div>
+
+		<div class="gfg">
+
+			<table id="myTable" class="table">
+				<thead>
+					<tr>
+						<th scope="col" class="col-3">#</th>
+						<th scope="col" class="col-3">Start</th>
+						<th scope="col" class="col-3">Relation</th>
+						<th scope="col" class="col-3">End</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+	<script>
+		function getRandomInt(max) {
+			return Math.floor(Math.random() * max);
+		}
+		$(document).ready(function () {
+			// PARTIE POUR CONSULTATION
+			var chosenWord;
+			var chosenConcept;
+			var limit = 0;
+			var glob = 0;
+			var rel = ['RelatedTo', 'FormOf', 'IsA', 'PartOf', 'HasA', 'UsedFor', 'CapableOf', 'AtLocation', 'Causes', 'HasSubevent', 'HasFirstSubevent', 'HasLastSubevent', 'HasPrerequisite', 'HasProperty', 'MotivatedByGoal', 'ObstructedBy', 'Desires', 'CreatedBy', 'Synonym', 'Antonym', 'DistinctFrom', 'DerivedFrom', 'SymbolOf', 'DefinedAs', 'MannerOf', 'LocatedNear', 'HasContext', 'SimilarTo', 'EtymologicallyRelatedTo', 'EtymologicallyDerivedFrom', 'CausesDesire', 'MadeOf', 'ReceivesAction', 'ExternalURL'];
+			$('#reglement').hide();
+			$('.maindiv').hide();
+			$('.games').hide();
+			$('.oui-non').hide();
+			$('.qui-suis-je').hide();
+			$('.consigne').hide();
+			$('#bt1').on('click', function () {
+				$('.games').hide();
+				$('.oui-non').hide();
+				$('.qui-suis-je').hide();
+				$('.consigne').hide();
+				$('.maindiv').toggle();
+			});
+			// button search
+			$('#hit').click(function () {
+				var search = $('#form1').val();
+				//console.log(search.view);
+				var search_tab = search.split(' ');
+				// on analyse input user
+				if (search_tab.length > 1) {
+					url_bis = 'http://api.conceptnet.io/query?node=/c/en/' + search_tab[0] + '&rel=/r/' + search_tab[1] + '&limit=1000';
+				}
+				// mot compose
+
+				else {
+					if (rel.includes(search)) {
+						url_bis = 'http://api.conceptnet.io/query?rel=/r/' + search + '&limit=1000';
+						$('#previous').show();
+						$('#next').show();
+
+					}
+					else {
+						url_bis = 'http://api.conceptnet.io/query?node=/c/en/' + search + '&limit=1000';
+						$('#previous').hide();
+						$('#next').hide();
+
+					}
+				}
+
+				$('#myTable > tbody').html('');
+				$.ajax({
+					method: 'GET',
+					url: url_bis,
+					dataType: 'json',
+				}).done(function (data) {
+					var edges = data.edges;
+					var check = 0;
+					var global_bis = 0;
+					$.map(edges, function (i, user) {
+						if (i.start.language == "en" && i.end.language == "en") {
+							global_bis += 1;
+							var start = i.start.label;
+							var rel = i.rel.label;
+							var end = i.end.label;
+							$('#myTable > tbody:last-child').append('<tr><td> ' + global_bis + '</td><td>' + start + '</td><td>' + rel +
+								'</td><td>' + end + '</td></tr>');
+
+						}
+
+
+					})
+				});
+
+			});
+
+
+			// button previous/next
+
+
+
+			$('#next').click(function () {
+				limit += 1000;
+				var search = $('#form1').val();
+				//console.log(search.view);
+				// on doit check si le search est concept ou concept + relation ou relation
+				$('#myTable > tbody').html('');
+				$.ajax({
+					method: 'GET',
+					url: 'http://api.conceptnet.io/query?rel=/r/' + search + '&offset=' + limit + '&limit=1000',
+					dataType: 'json',
+				}).done(function (data) {
+					if (data.view.nextPage == null) {
+						limit -= 1000;
+					}
+					var edges = data.edges;
+					//console.log(edges[155].start.language);
+					var check = 0;
+					var global_bis = 0;
+					$.map(edges, function (i, user) {
+						if (i.start.language == "en" && i.end.language == "en") {
+
+							global_bis += 1;
+							//check += 1;
+							var start = i.start.label;
+							var rel = i.rel.label;
+							var end = i.end.label;
+							$('#myTable > tbody:last-child').append('<tr><td> ' + global_bis + '</td><td>' + start + '</td><td>' + rel +
+								'</td><td>' + end + '</td></tr>');
+
+						}
+
+
+					})
+				});
+
+
+			});
+
+
+			// button previous
+
+
+
+			$('#previous').click(function () {
+				limit -= 1000;
+				var search = $('#form1').val();
+				//console.log(search.view);
+				$('#myTable > tbody').html('');
+				$.ajax({
+					method: 'GET',
+					url: 'http://api.conceptnet.io/query?rel=/r/' + search + '&offset=' + limit + '&limit=1000',
+					dataType: 'json',
+				}).done(function (data) {
+					//console.log(data.view.firstPage);
+					if (data.view.previousPage == null) {
+						limit += 1000;
+					}
+					var edges = data.edges;
+					//console.log(edges[155].start.language);
+					var check = 0;
+					var global_bis = 0;
+					$.map(edges, function (i, user) {
+						if (i.start.language == "en" && i.end.language == "en") {
+
+							global_bis += 1;
+							//check += 1;
+							var start = i.start.label;
+							var rel = i.rel.label;
+							var end = i.end.label;
+							$('#myTable > tbody:last-child').append('<tr><td> ' + global_bis + '</td><td>' + start + '</td><td>' + rel +
+								'</td><td>' + end + '</td></tr>');
+
+						}
+
+
+					})
+				});
+
+
+			});
+
+
+
+
+		});
+		// Array of relations
+		// ARRAY DE BASE POUR FAIRE LA PRESENTATION AU DEBUT
+		var glob = 0;
+		var rel = ['RelatedTo', 'FormOf', 'IsA', 'PartOf', 'HasA', 'UsedFor', 'CapableOf', 'AtLocation', 'Causes', 'HasSubevent', 'HasFirstSubevent', 'HasLastSubevent', 'HasPrerequisite', 'HasProperty', 'MotivatedByGoal', 'ObstructedBy', 'Desires', 'CreatedBy', 'Synonym', 'Antonym', 'DistinctFrom', 'DerivedFrom', 'SymbolOf', 'DefinedAs', 'MannerOf', 'LocatedNear', 'HasContext', 'SimilarTo', 'EtymologicallyRelatedTo', 'EtymologicallyDerivedFrom', 'CausesDesire', 'MadeOf', 'ReceivesAction', 'ExternalURL'];
+		for (var i = 0; i < rel.length; i++) {
+
+			$.ajax({
+				method: 'GET',
+				url: 'http://api.conceptnet.io/query?rel=/r/' + rel[i] + '&limit=300',
+				dataType: 'json',
+			}).done(function (data) {
+				var edges = data.edges;
+				var check = 0;
+				$.map(edges, function (i, user) {
+					if ((i.start.language == "en" && i.end.language == "en") && check != 2) {
+						glob += 1;
+						check += 1;
+						var start = i.start.label;
+						var rel = i.rel.label;
+						var end = i.end.label;
+						$('#myTable > tbody:last-child').append('<tr><td> ' + glob + '</td><td>' + start + '</td><td>' + rel +
+							'</td><td>' + end + '</td></tr>');
+
+					}
+
+
+				})
+			});
+		}
+		$(document).ready(function () {
+			$('#bt2').on('click', function () {
+				$('.maindiv').hide();
+				$('.games').toggle();
+				$('#reglement').show();
+			});
+			$('#oui-non').on('click', function () {
+				$("#oui-non").prop('disabled', true);
+				$("#qui-suis-je").prop('disabled', true);
+				$("#consigne").prop('disabled', true);
+				$("#reglement").hide()
+				$('#prompt').empty('');
+				$('.consigne, .qui-suis-je').hide();
+				$('.oui-non').show();
+				$("#resultat").empty('');
+				$("#non, #oui, #prompt").show();
+				var timeleft = 15;
+				
+				
+
+
+				let relation = rel[Math.floor(Math.random() * rel.length)];
+				var clientAnswer = ""
+				var correctAnswer = ""
+				var bit = 0
+				let startWord = []
+				let endWord = []
+				$.ajax({
+					method: 'GET',
+					url: 'http://api.conceptnet.io/query?rel=/r/' + relation + '&limit=1000',
+					dataType: 'json',
+				}).done(function (data) {
+					var edges = data.edges;
+					var check = 0;
+					var global_bis = 0;
+					$.map(edges, function (i, user) {
+						if (i.start.language == "en") {
+							global_bis += 1;
+							var start = i.start.label;
+							var end = i.end.label;
+							startWord.push(start);
+							endWord.push(end);
+						}
+					})
+					promptNumber1 = Math.floor(Math.random() * (global_bis - 1));
+					promptNumber2 = Math.floor(Math.random() * (global_bis - 1));
+
+					if (promptNumber1 != promptNumber2) {
+						bit = (Math.floor(Math.random() * 2))
+					} else {
+						bit = 0
+					}
+					//console.log(bit)
+					if (bit == 0) {
+						correctAnswer = "oui"
+						$('#prompt').append(startWord[promptNumber1] + " " + relation + "? " + endWord[promptNumber1]);
+					} else {
+						correctAnswer = "non"
+						$('#prompt').append(startWord[promptNumber1] + " " + relation + "? " + endWord[promptNumber2]);
+					}
+					 downloadTimer = setInterval(function () {
+						if (timeleft <= 0) {
+							clearInterval(downloadTimer);
+							$('#countdownOui-non').html('Finished !');
+
+						} else {
+							$('#countdownOui-non').html(timeleft + " seconds remaining");
+						}
+						timeleft -= 1;
+					}, 1000);
+					$('#oui').unbind('click').on('click', function () {
+						$("#oui-non").prop('disabled', false);
+						$("#qui-suis-je").prop('disabled', false);
+						$("#consigne").prop('disabled', false);
+						clientAnswer = (this.value)
+						console.log('correct answer is ' + correctAnswer + ", bit is " + bit + " and client answer is " + clientAnswer)
+						if (clientAnswer == bit) {
+							$("#resultat").html("Bravo, c'est la bonne réponse")
+							timeleft = 0
+							$("#non, #oui, #prompt").hide();
+						} else {
+							$("#resultat").html("Mauvaise réponse")
+							timeleft = 0
+							$("#non, #oui, #prompt").hide();
+						}
+					});
+					$('#non').unbind('click').on('click', function () {
+						$("#oui-non").prop('disabled', false);
+						$("#qui-suis-je").prop('disabled', false);
+						$("#consigne").prop('disabled', false);
+						clientAnswer = (this.value)
+						console.log('correct answer is ' + correctAnswer + ", bit is " + bit + " and client answer is " + clientAnswer)
+						if (clientAnswer == bit) {
+							$("#resultat").html("Bravo, c'est la bonne réponse")
+							timeleft = 0
+							$("#non, #oui, #prompt").hide();
+						} else {
+							$("#resultat").html("Mauvaise réponse")
+							timeleft = 0
+							$("#non, #oui, #prompt").hide();
+						}
+					});
+				});
+			});
+			$('#consigne').on('click', function () {
+				$("#consigne").prop('disabled', true);
+				$("#qui-suis-je").prop('disabled', true);
+				$("#oui-non").prop('disabled', true);
+				$("#consigne_input").prop('disabled', false);
+				$('#reglement').hide();
+				$('.oui-non').hide();
+				$('.qui-suis-je').hide();
+				$('#countdown').show();
+				$('.consigne').show();
+				$('#consigne-answer').show();
+				var timeleft = 10;
+				var downloadTimer = setInterval(function () {
+					if (timeleft <= 0) {
+						clearInterval(downloadTimer);
+						$('#countdown').html('Finished !');
+						$("#consigne_input").prop('disabled', true);
+					} else {
+						$('#countdown').html(timeleft + " seconds remaining");
+						//document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+					}
+					timeleft -= 1;
+				}, 1000);
+				$('#consigne-answer').click(function () {
+				timeleft=0
+				})
+				$('#p-consigne').empty('');
+				$('#p-consigne-false').empty('');
+				$("#consigne_input").val("");
+				// PARTIE SET UP URL POUR GENERER QUESTION POUR USER
+				var rel_tmp = ['Synonym', 'UsedFor', 'RelatedTo', 'IsA'];
+				// tab Synonym
+				// pour enrichir les reponses ajouter des mots dans les tableaux
+				// pas toucher au tableau rel_tmp
+				var rel_syn = ['fruit', 'war'];
+				var rel_used_for = ['pen', 'gun', 'book', 'school'];
+				var rel_IsA = ['pen', 'bed', 'water', 'king', 'bread'];
+				var rel_related_to = ['king', 'dentist', 'pain'];
+				var random_int = getRandomInt(rel_tmp.length);
+				if (rel_tmp[random_int] == "Synonym") {
+					chosenWord = rel_syn[getRandomInt(rel_syn.length)];
+					chosenConcept = "Synonym";
+				}
+				else if (rel_tmp[random_int] == "UsedFor") {
+					chosenWord = rel_used_for[getRandomInt(rel_used_for.length)];
+					chosenConcept = "UsedFor";
+				}
+				else if (rel_tmp[random_int] == "IsA") {
+					chosenWord = rel_IsA[getRandomInt(rel_IsA.length)];
+					chosenConcept = "IsA";
+				}
+				else {
+					chosenWord = rel_related_to[getRandomInt(rel_related_to.length)];
+					chosenConcept = "RelatedTo";
+				}
+				$("#p-consigne").html('<p>' + chosenWord + ' ' + chosenConcept + '?</p>');
+
+			});
+			// partie consigne 
+			// button soumettre
+			$('#consigne-answer').click(function () {
+				var search = $('#consigne_input').val();
+				$('#consigne-answer').toggle();
+				$("#consigne").prop('disabled', false);
+				$("#qui-suis-je").prop('disabled', false);
+				$("#oui-non").prop('disabled', false);
+				timeleft=0
+
+				var solution = [];
+				$.ajax({
+					method: 'GET',
+					url: 'http://api.conceptnet.io/query?node=/c/en/' + chosenWord + '&rel=/r/' + chosenConcept + '&limit=50',
+					dataType: 'json',
+				}).done(function (data) {
+					for (var i = 0; i < data.edges.length; i++) {
+						if (data.edges[i].start.language == "en" && data.edges[i].end.language == "en") {
+							var start_tmp = data.edges[i].end.label;
+							var end_tmp = data.edges[i].start.label;
+							solution.push(start_tmp);
+							solution.push(end_tmp);
+
+						}
+
+					}
+					// on verifie si le mot du user est dans les solutions
+					let tmp_str = search.toString();
+					let solu_tab = tmp_str.split(' ');
+					console.log(solution);
+					var points=0
+					for (var i = 0; i < solu_tab.length; i++) {
+						if (solution.includes(solu_tab[i])) {
+							points+=1
+							$('#p-consigne').append(solu_tab[i] + ' Correct, you got it! <br>');
+							
+						}
+						else {
+							$('#p-consigne-false').append(solu_tab[i] + ' False ! <br>');
+
+						}
+					}
+					$("#resultConsigne").html("Vous avez obtenu " + points + " points.")
+				});
+			});
+			$('#qui-suis-je').on('click', function () {
+				$("#qui-suis-je").prop('disabled', true);
+				$("#oui-non").prop('disabled', true);
+						$("#consigne").prop('disabled', true);
+				$("#reglement").hide()
+				$('.oui-non, .consigne',).hide();
+				$("#submitQui").show();
+				$('.qui-suis-je').show();
+				$("#question").empty('');
+				$("#indices").empty('');
+				$('#qui-suis-je-answer').empty('');
+				$("#result").empty('');
+				let concepts = ["cat", "student", "politician", "artist"]
+				let concept = concepts[Math.floor(Math.random() * concepts.length)];
+
+				let startWord = []
+				let endWord = []
+				let relation = []
+				let prompt = ""
+				$.ajax({
+					method: 'GET',
+					url: 'http://api.conceptnet.io/query?node=/c/en/' + concept + '&limit=1000',
+					dataType: 'json',
+				}).done(function (data) {
+					var edges = data.edges;
+					var check = 0;
+					var global_bis = 0;
+					$.map(edges, function (i, user) {
+						if (i.start.language == "en") {
+							global_bis += 1;
+							var start = i.start.label;
+							var rel = i.rel.label;
+							var end = i.end.label;
+							startWord.push(start)
+							relation.push(rel)
+							endWord.push(end)
+						}
+					})
+					prompt = (startWord[0] + " " + relation[0] + " " + endWord[0]).toLowerCase
+					let indice1 = (startWord[1] + relation[1] + endWord[1] + "").toLowerCase
+					let indice2 = (startWord[2] + relation[2] + endWord[2] + "").toLowerCase
+					let indice3 = (startWord[3] + relation[3] + endWord[3] + "").toLowerCase
+					let indice4 = (startWord[4] + relation[4] + endWord[4] + "").toLowerCase
+
+					if (startWord[0].includes(concept)) {
+						startWord[0] = '???'
+						prompt = startWord[0] + " " + relation[0] + " " + endWord[0]
+					}
+					if (endWord[0].includes(concept)) {
+						endWord[0] = '???'
+						indice2 = startWord[0] + " " + relation[0] + " " + endWord[0]
+					}
+
+					if (startWord[1].includes(concept)) {
+						startWord[1] = '???'
+						indice1 = startWord[1] + " " + relation[1] + " " + endWord[1]
+					}
+					if (startWord[2].includes(concept)) {
+						startWord[2] = '???'
+						indice2 = startWord[2] + " " + relation[2] + " " + endWord[2]
+					}
+					if (startWord[1].includes(concept)) {
+						startWord[1] = '???'
+						indice1 = startWord[1] + " " + relation[1] + " " + endWord[1]
+					}
+					if (startWord[2].includes(concept)) {
+						startWord[2] = '???'
+						indice2 = startWord[2] + " " + relation[2] + " " + endWord[2]
+					}
+					if (startWord[3].includes(concept)) {
+						startWord[3] = '???'
+						indice3 = startWord[3] + " " + relation[3] + " " + endWord[3]
+					}
+					if (startWord[4].includes(concept)) {
+						startWord[4] = '???'
+						indice4 = startWord[4] + " " + relation[4] + " " + endWord[4]
+					}
+					if (endWord[1].includes(concept)) {
+						endWord[1] = '???'
+						indice1 = startWord[1] + " " + relation[1] + " " + endWord[1]
+					}
+					if (endWord[2].includes(concept)) {
+						endWord[2] = '???'
+						indice2 = startWord[2] + " " + relation[2] + " " + endWord[2]
+					}
+					if (endWord[3].includes(concept)) {
+						endWord[3] = '???'
+						indice3 = startWord[3] + " " + relation[3] + " " + endWord[3]
+					}
+					if (endWord[4].includes(concept)) {
+						endWord[4] = '???'
+						indice4 = startWord[4] + " " + relation[4] + " " + endWord[4]
+					}
+					console.log(prompt)
+
+					$('#question').append(prompt)
+					var points = 8
+					var timeleft = 100;
+					var downloadTimer = setInterval(function () {
+						if (timeleft <= 0) {
+							clearInterval(downloadTimer);
+							$('#countdownQui').html('Finished !');
+
+						} else {
+							$('#countdownQui').html(timeleft + " seconds remaining");
+							if (timeleft == 80) {
+								$('#indices').append(indice1)
+								console.log(indice1)
+								points-=1
+							}
+							if (timeleft == 60) {
+								$('#indices').append(indice2)
+								console.log(indice2)
+								points-=1
+							}
+							if (timeleft == 40) {
+								$('#indices').append(indice3)
+								console.log(indice3)
+								points-=1
+							}
+							if (timeleft == 20) {
+								$('#indices').append(indice4)
+								console.log(indice4)
+								points-=1
+
+							}
+
+						}
+						timeleft -= 1;
+					}, 1000);
+					var reponse = $('#qui-suis-je-answer').val()
+                    $('#submitQui').on('click', function () {
+                        $("#qui-suis-je").prop('disabled', false);
+                        $("#oui-non").prop('disabled', false);
+                        $("#consigne").prop('disabled', false);
+                        $("#submitQui").hide();
+                        timeleft=0
+                        console.log(reponse)
+                        if(reponse == ""){
+                            $("#result").html("Mauvaise réponse, aucun point")
+                            $('#qui-suis-je-answer').val('');
+                        }
+                        else if ((concept).includes(reponse)) {
+                            $("#result").html("Bravo, c'est la bonne réponse, vous avez: " + points + " points")
+                            $('#qui-suis-je-answer').val('');
+                        } else if (!(concept).includes(reponse)) {
+                            $("#result").html("Mauvaise réponse, aucun point")
+                            $('#qui-suis-je-answer').val('');
+                        }
+                    })
+
+                });
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
